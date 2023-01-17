@@ -5,10 +5,11 @@ export const FormContacts =({onSubmit})=>{
    const handleSubmit=event=>{
     event.preventDefault();
     console.log(event)
-    const {name,number} = event.target.elements;
-  console.log(name.value)
-  console.log(number.value)
+    const {name,number,} = event.target.elements;
+
     onSubmit(name.value,number.value)
+    name.value='';
+    number.value='';
    }
 
    
@@ -37,9 +38,11 @@ export const FormContacts =({onSubmit})=>{
                     />
                 </label>
                     
-
+                
           <button>Add contact</button>
-        </form>
+         </form>
+        
+           
         </div>
 
     )
