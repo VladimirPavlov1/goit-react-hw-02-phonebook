@@ -3,7 +3,7 @@ import { FormContacts } from "./FormContacts/FormContacts";
 import { Section } from "./Section/Section";
 import { nanoid } from 'nanoid'
 import { ContactList } from "./ContactList/ContactList";
-import Filter  from "./Filter/Filter";
+import {Filter}  from "./Filter/Filter";
 
 
 
@@ -21,39 +21,35 @@ class App extends Component{
     number: '',
   }
 
-
+  getContactsFilter=()=>{
+    const {contacts,filter}=this.state;
+    const normalizedFilter=filter.toLocaleLowerCase();
+    return contacts.filter(({name})=>name.toLocaleLowerCase().includes(normalizedFilter))
+  }
 
   addContacts=(name,number,id)=>{
     this.setState(prevState=>({
      contacts: [...prevState.contacts,{name,number,id:nanoid()}]}))
   }
- 
-  findContact=()=>{
-  const contact=this.state.contacts.filter(contact=>{
-    if(contact.name===this.state.filter){
-      return contact
-    }})
-    console.log(contact)
-    this.setState({contacts:[...contact]})
-  }
-  
 
-  inputChangeHandler=(value)=>{
-   this.setState({filter:value});
-   this.findContact();
+
+  inputChangeHandler=(event)=>{
+ const {value}=event.target;
+ this.setState({filter:value})
   }
 
   render (){
+    const {filter}=this.state;
+    const visibleContacts=this.getContactsFilter();
     return(
-   
       <div>
         <Section title="Phonebook">
           <FormContacts onSubmit={this.addContacts} />
-          <Filter onChange={this.inputChangeHandler} />
+          <Filter onChange={this.inputChangeHandler} value={filter}/>
         </Section>
         
         <Section title="Contacts">
-          <ContactList contacts={this.state.contacts} />
+          <ContactList contacts={visibleContacts} />
         </Section>
         
       </div>

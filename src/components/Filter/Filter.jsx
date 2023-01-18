@@ -1,30 +1,18 @@
-import { Component } from "react"
+import React from "react"
 
-class Filter extends Component{
+export const Filter =({onChange,value})=>{
    
-state={
-    filter:'',
-}
-
-
-handleChange=event=>{
-    const {name,value}= event.currentTarget;
-    this.setState({filter:value})
-    this.props.onChange(value)
-   
-}
       
-render(){ return(
+ return(
          <div>
             <label>
                 Find contact by name
-                <input onChange={this.handleChange} value={this.state.filter} type="text" 
+                <input onChange={onChange} value={value} type="text" 
                 name="filter"/>
             </label>
 
 
-        </div>)}
+        </div>)
    
 }
 
-export default Filter;
