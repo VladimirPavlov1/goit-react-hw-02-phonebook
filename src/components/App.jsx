@@ -5,6 +5,9 @@ import { nanoid } from 'nanoid'
 import { ContactList } from "./ContactList/ContactList";
 import {Filter}  from "./Filter/Filter";
 
+import { Contacts, Container } from "./App.styled";
+import PropTypes from 'prop-types';
+
 
 
 class App extends Component{
@@ -17,8 +20,7 @@ class App extends Component{
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
     filter: '',
-    name: '',
-    number: '',
+    
   }
 
   getContactsFilter=()=>{
@@ -28,8 +30,16 @@ class App extends Component{
   }
 
   addContacts=(name,number,id)=>{
-    this.setState(prevState=>({
-     contacts: [...prevState.contacts,{name,number,id:nanoid()}]}))
+    const {contacts}= this.state;
+    if(contacts.find(contact=>contact.name.toLocaleLowerCase().includes(name.toLocaleLowerCase()))){
+      alert(`${name} is already in contacts`);
+      return
+    }else{
+      this.setState(prevState=>({
+        contacts: [...prevState.contacts,{name,number,id:nanoid()}]}))
+    }
+    
+    
   }
 
 
@@ -42,17 +52,18 @@ class App extends Component{
     const {filter}=this.state;
     const visibleContacts=this.getContactsFilter();
     return(
-      <div>
+      <Container>
         <Section title="Phonebook">
           <FormContacts onSubmit={this.addContacts} />
+         
+        </Section>
+        
+        <Contacts>Contacts</Contacts> 
           <Filter onChange={this.inputChangeHandler} value={filter}/>
-        </Section>
-        
-        <Section title="Contacts">
           <ContactList contacts={visibleContacts} />
-        </Section>
         
-      </div>
+        
+      </Container>
      
    
     )
