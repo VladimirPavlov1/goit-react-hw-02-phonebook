@@ -1,7 +1,16 @@
+import PropTypes from 'prop-types';
+import { BtnDelete, Title, WrapperContact } from './Contact.styled';
 
-export const Contact = ({userName,userNumber,id})=>{
+
+export const Contact = ({userName,userNumber,userId,onDelete})=>{
    
-    return <div>
-        <h2>{userName}:{userNumber}</h2>
-    </div>
+    return <WrapperContact>
+        <Title>{userName} : {userNumber}</Title>
+        <BtnDelete type="button" onClick={()=>onDelete(userId)}>delete</BtnDelete>
+    </WrapperContact>
+}
+
+Contact.propTypes={
+    userName:PropTypes.string.isRequired,
+    userNumber:PropTypes.string.isRequired
 }

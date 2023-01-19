@@ -2,6 +2,10 @@ import { BtnAdd, FormWrapper, Input, Label } from "./FormContacts.styled";
 
 export const FormContacts =({onSubmit})=>{
    
+   
+
+    
+
    const handleSubmit=event=>{
     event.preventDefault();
     

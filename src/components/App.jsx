@@ -6,7 +6,7 @@ import { ContactList } from "./ContactList/ContactList";
 import {Filter}  from "./Filter/Filter";
 
 import { Contacts, Container } from "./App.styled";
-import PropTypes from 'prop-types';
+
 
 
 
@@ -25,13 +25,13 @@ class App extends Component{
 
   getContactsFilter=()=>{
     const {contacts,filter}=this.state;
-    const normalizedFilter=filter.toLocaleLowerCase();
-    return contacts.filter(({name})=>name.toLocaleLowerCase().includes(normalizedFilter))
+    const normalizedFilter=filter.toLowerCase();
+    return contacts.filter(contact=>(contact.name.toLowerCase().includes(normalizedFilter)))
   }
 
   addContacts=(name,number,id)=>{
     const {contacts}= this.state;
-    if(contacts.find(contact=>contact.name.toLocaleLowerCase().includes(name.toLocaleLowerCase()))){
+    if(contacts.find(contact=>contact.name.toLowerCase().includes(name.toLowerCase()))){
       alert(`${name} is already in contacts`);
       return
     }else{
@@ -48,6 +48,11 @@ class App extends Component{
  this.setState({filter:value})
   }
 
+  deleteContact=contactId=>{
+   this.setState(prevState=>({
+    contacts:prevState.contacts.filter(({id})=>id!==contactId)}))
+  }
+
   render (){
     const {filter}=this.state;
     const visibleContacts=this.getContactsFilter();
@@ -60,7 +65,7 @@ class App extends Component{
         
         <Contacts>Contacts</Contacts> 
           <Filter onChange={this.inputChangeHandler} value={filter}/>
-          <ContactList contacts={visibleContacts} />
+          <ContactList contacts={visibleContacts} onDelete={this.deleteContact}/>
         
         
       </Container>
