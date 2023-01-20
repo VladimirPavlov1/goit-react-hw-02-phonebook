@@ -65,7 +65,8 @@ class App extends Component{
         
         <Contacts>Contacts</Contacts> 
           <Filter onChange={this.inputChangeHandler} value={filter}/>
-          <ContactList contacts={visibleContacts} onDelete={this.deleteContact}/>
+          {visibleContacts.length?<ContactList contacts={visibleContacts} onDelete={this.deleteContact}/>:
+          alert('No such contact found')}
         
         
       </Container>
