@@ -8,11 +8,7 @@ export const Filter = ({ onChange, value }) => {
     <div>
       <Label>
         Find contact by name
-        <Input 
-         onChange={onChange}
-         value={value}
-         type="text"
-         name="filter" />
+        <Input onChange={onChange} value={value} type="text" name="filter" />
       </Label>
     </div>
   );

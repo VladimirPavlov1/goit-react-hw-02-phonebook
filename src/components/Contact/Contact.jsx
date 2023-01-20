@@ -17,6 +17,6 @@ export const Contact = ({ userName, userNumber, userId, onDelete }) => {
 Contact.propTypes = {
   userName: PropTypes.string.isRequired,
   userNumber: PropTypes.string.isRequired,
-  userId:PropTypes.string.isRequired,
-  onDelete:PropTypes.func.isRequired,
+  userId: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
