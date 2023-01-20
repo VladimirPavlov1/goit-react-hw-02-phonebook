@@ -1,4 +1,6 @@
 import { BtnAdd, FormWrapper, Input, Label } from "./FormContacts.styled";
+import PropTypes from 'prop-types';
+
 
 export const FormContacts =({onSubmit})=>{
    
@@ -50,4 +52,8 @@ export const FormContacts =({onSubmit})=>{
         </FormWrapper>
 
     )
+}
+
+FormContacts.propTypes={
+    onChange:PropTypes.func.isRequired,
 }

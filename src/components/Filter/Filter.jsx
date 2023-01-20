@@ -1,25 +1,24 @@
-import React from "react"
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Input, Label } from "./Filter.styled"
+import { Input, Label } from './Filter.styled';
 
-export const Filter =({onChange,value})=>{
-   
-      
- return(
-         <div>
-            <Label>
-                Find contact by name
-                <Input onChange={onChange} value={value} type="text" 
-                name="filter"/>
-            </Label>
+export const Filter = ({ onChange, value }) => {
+  return (
+    <div>
+      <Label>
+        Find contact by name
+        <Input 
+         onChange={onChange}
+         value={value}
+         type="text"
+         name="filter" />
+      </Label>
+    </div>
+  );
+};
 
-
-        </div>)
-   
-}
-
-Filter.propTypes={
-    value:PropTypes.string.isRequired,
-}
-
+Filter.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
