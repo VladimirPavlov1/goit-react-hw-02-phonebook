@@ -1,8 +1,9 @@
 import styled from '@emotion/styled'
+import { Field } from 'formik';
 
 export const FormWrapper = styled.div`
 width: 400px;
-height: 250px;
+height: 350px;
 padding:10px;
 
 border:1px solid black;
@@ -10,14 +11,15 @@ border:1px solid black;
 
 export const Label = styled.label`
 display: block;
+padding-bottom:20px;
 
-margin-bottom: 30px;
+
 
 font-size: 22px;
 font-weight: 500;
 `;
 
-export const Input = styled.input`
+export const Input = styled(Field)`
 display: block;
 width: 170px;
 height: 30px;
@@ -36,4 +38,8 @@ font-size: 16px;
 font-weight: 700;
 :hover{
     background-color:blue};
+`;
+
+export const ErrorText= styled.p`
+color:red;
 `;

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { BtnDelete, Title, WrapperContact } from './Contact.styled';
 
 export const Contact = ({ userName, userNumber, userId, onDelete }) => {
+  console.log(userNumber)
   return (
     <WrapperContact>
       <Title>

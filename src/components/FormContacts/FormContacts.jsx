@@ -1,45 +1,78 @@
-import { BtnAdd, FormWrapper, Input, Label } from './FormContacts.styled';
+import { BtnAdd, FormWrapper, Input, Label,ErrorText} from './FormContacts.styled';
 import PropTypes from 'prop-types';
+import { Formik,Form, ErrorMessage} from 'formik';
+import * as Yup from 'yup';
+
+
+const FilterSchema=Yup.object().shape({
+  name:Yup.string()
+        .min(3,'Please, enter your full name')
+        .max(26, `Your upper limit symbol`)
+        .required('Required'),
+  number:Yup.string()
+           .required('Required')
+           .min(6,'Min 6 symbol')
+           .max(12, 'Max symbol 12')
+           
+           
+});
+
+const FormError = ({name})=>{
+
+  return (<ErrorMessage name={name}
+     render={message=><><ErrorText>{message}</ErrorText></>}/>)
+
+}
+
+
+
+
+
+
+const initialValues={
+  name:'',
+  number:''
+ }
 
 export const FormContacts = ({ onSubmit }) => {
-  const handleSubmit = event => {
-    event.preventDefault();
 
-    const { name, number } = event.target.elements;
 
-    onSubmit(name.value, number.value);
-    name.value = '';
-    number.value = '';
-  };
+ const handleSubmit=({name,number},{resetForm})=>{
+
+  onSubmit(name,number);
+ 
+ resetForm();
+ }
+
 
   return (
+   <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FilterSchema}>
     <FormWrapper>
-      <form onSubmit={handleSubmit}>
-        <Label>
-          Name
-          <Input
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-          />
-        </Label>
+        <Form>
+          <Label>
+            Name
+            <Input
+              type="text"
+              name="name"
+            />
+          <FormError name="name" />
+         
+          </Label>
 
-        <Label>
-          Number
-          <Input
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-          />
-        </Label>
+          <Label>
+            Number
+            <Input
+              type="tel"
+              name="number"
+            />
+            <FormError name="number" />
+          
+          </Label>
 
-        <BtnAdd>Add contact</BtnAdd>
-      </form>
-    </FormWrapper>
+          <BtnAdd type="submit">Add contact</BtnAdd>
+        </Form>
+      </FormWrapper>
+    </Formik>  
   );
 };
 
